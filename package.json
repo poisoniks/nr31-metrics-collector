@@ -1,0 +1,10 @@
+{
+  "name": "nr31-metrics-collector",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "src/index.mjs",
+  "scripts": { "start": "node src/index.mjs" },
+  "dependencies": {
+    "dockerode": "^4.0.0"
+  }
+}
