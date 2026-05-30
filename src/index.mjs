@@ -132,11 +132,13 @@ async function updateContainersList() {
         const containers = await docker.listContainers({ all: true });
         const currentIds = new Set(containers.map(c => c.Id));
         
-        // Remove dead streams
-        for (const id of activeStreams.keys()) {
+        // Remove dead containers
+        for (const id of Object.keys(state.containers)) {
             if (!currentIds.has(id)) {
-                activeStreams.get(id).destroy();
-                activeStreams.delete(id);
+                if (activeStreams.has(id)) {
+                    activeStreams.get(id).destroy();
+                    activeStreams.delete(id);
+                }
                 delete state.containers[id];
             }
         }
